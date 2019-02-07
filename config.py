@@ -376,6 +376,7 @@ def common_config_post(phase):
     FLAGS.eval_dir = os.path.join(FLAGS.train_dir, "eval")
     FLAGS.checkpoint_dir = FLAGS.train_dir
 
+# calling the train.py
 def train():
     call(["python", "train.py"] + flags_to_cmd())
 
@@ -409,7 +410,7 @@ if __name__ == '__main__':
     common_config(phase)
     globals()[small_config](phase)
     common_config_post(phase)
-
+    # calling the train function above
     work = { "train": train,
              "eval" : eval,
              "test": test,

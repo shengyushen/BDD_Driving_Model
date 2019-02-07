@@ -95,7 +95,9 @@ tf.app.flags.DEFINE_integer('checkpoint_interval', 5000,
 
 tf.app.flags.DEFINE_string('EWC', 'off',
                            '''Elastic Weight Consolidation method status: off, stat, apply''')
-
+#build a network for  just for a single GPU
+# input is just the image used as input
+# outputs is the desired label
 def _tower_loss(inputs, outputs, num_classes, scope):
   # inputs and outputs are two lists of tensors
 
@@ -123,6 +125,7 @@ def _tower_loss(inputs, outputs, num_classes, scope):
   """
 
   # Build inference Graph.
+  # actually this is not the standard model in tf, it is the inference function defined in models dir
   logits = model.inference(inputs, num_classes, for_training=True, scope=scope)
 
   # Build the portion of the Graph calculating the losses. Note that we will
